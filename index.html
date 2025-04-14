@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cốm Nén</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fefcf7;
+    }
+
+    header {
+      background-color: #f3f5e9;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 40px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    nav a {
+      margin-left: 30px;
+      text-decoration: none;
+      color: #003300;
+      font-weight: bold;
+      font-size: 16px;
+      transition: color 0.3s, border-bottom 0.3s;
+      padding-bottom: 5px;
+    }
+
+    nav a:hover,
+    nav a.active {
+      color: #00994d;
+      border-bottom: 3px solid #00994d;
+    }
+
+    .banner {
+      background-image: url("assets/banner1.png");
+      background-size: cover;
+      background-position: center;
+      height: 450px;
+      position: relative;
+      color: note;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 60px;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeOut {
+      from {
+        opacity: 1;
+      }
+
+      to {
+        opacity: 0;
+      }
+    }
+
+    .banner h1 {
+      font-size: 84px;
+      color: #003300;
+      background-color: note;
+      padding: 100px 20px;
+      border-radius: 1000px;
+      font-family: 'EB Garamond', cursive;
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    @media (max-width: 768px) {
+      .banner h1 {
+        font-size: 40px;
+        padding: 15px 20px;
+      }
+    }
+
+    .content {
+      display: flex;
+      padding: 40px;
+      gap: 30px;
+    }
+
+    .section {
+      flex: 1;
+      background-color: #f3f5e9;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    .section h2 {
+      color: #004d26;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .section img {
+      width: 100%;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .section.reverse {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .section.reverse ul,
+    .section.reverse p {
+      flex: 1;
+    }
+
+    .section.reverse img {
+      flex: 1;
+      max-width: 30%;
+      margin-top: 0;
+    }
+
+    .form-cart-wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding: 40px;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .contact-form,
+    .cart-form {
+      background-color: #f3f5e9;
+      padding: 30px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .contact-form {
+      order: 2;
+      margin-left: auto;
+    }
+
+    .cart-form {
+      order: 1;
+      margin-right: auto;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: inherit;
+    }
+
+    .contact-form button {
+      background-color: #006633;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .contact-form button:hover {
+      background-color: #004d26;
+    }
+
+    .cart-form ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .cart-form li {
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .cart-form h2 {
+      color: #004d26;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .cart-form button {
+      background-color: #00994d;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .cart-form button:hover {
+      background-color: #006633;
+    }
+
+    .cart-form select {
+      padding: 8px;
+      border-radius: 6px;
+      margin-top: 10px;
+      width: 100%;
+    }
+
+    footer {
+      background-color: #e5efe0;
+      padding: 30px 40px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    footer h3 {
+      color: #003300;
+    }
+
+    footer p {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    .product-section {
+      display: flex;
+      justify-content: space-around;
+      padding: 40px;
+      background-color: #f3f5e9;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+
+    .product {
+      width: 250px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+      margin: 10px;
+    }
+
+    .product img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .product h3 {
+      margin-top: 15px;
+      color: #004d26;
+    }
+
+    .product p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .product button {
+      margin-top: 10px;
+      padding: 8px 16px;
+      border: none;
+      background-color: #00994d;
+      color: white;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .product button:hover {
+      background-color: #006633;
+    }
+
+    .form-cart-wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding: 40px;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .contact-form,
+    .cart-form {
+      background-color: #f3f5e9;
+      padding: 30px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .contact-form {
+      order: 2;
+      margin-left: auto;
+    }
+
+    .cart-form {
+      order: 1;
+      margin-right: auto;
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-family: inherit;
+    }
+
+    .contact-form button {
+      background-color: #006633;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .contact-form button:hover {
+      background-color: #004d26;
+    }
+
+    .cart-form ul {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .cart-form li {
+      padding: 10px 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .cart-form h2 {
+      color: #004d26;
+      font-size: 24px;
+      margin-bottom: 15px;
+    }
+
+    .cart-form button {
+      background-color: #00994d;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .cart-form button:hover {
+      background-color: #006633;
+    }
+
+    .cart-form .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .cart-form input[type="number"] {
+      width: 60px;
+      padding: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .cart-summary {
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    footer {
+      background-color: #e5efe0;
+      padding: 30px 40px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    footer h3 {
+      color: #003300;
+    }
+
+    footer p {
+      margin: 8px 0;
+      font-size: 14px;
+    }
+
+    #order-success {
+      margin-top: 15px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <img src="assets/logo1.png" alt="Logo Cốm Nén" style="height: 100px;">
+    <nav>
+      <a href="#" onclick="setActive(this)">TRANG CHỦ</a>
+      <a href="https://tauruss2304.github.io/gioithieucoom/" onclick="setActive(this)">GIỚI THIỆU</a>
+      <a href="#" onclick="setActive(this)">SẢN PHẨM</a>
+      <a href="#cart" onclick="setActive(this)">GIỎ HÀNG</a>
+      <a href="#contact" onclick="setActive(this)">LIÊN HỆ</a>
+    </nav>
+  </header>
+
+  <div class="banner">
+    <h1>CỐM NÉN </h1>
+  </div>
+
+  <div class="content">
+    <div class="section">
+      <h2>Ý TƯỞNG CHÍNH</h2>
+      <p>“CỐM NÉN "CO'NE” là sự kết tinh thiên nhiên của lúa non đầu mùa, được làm nên công phu theo phương pháp truyền
+        thống.</p>
+      <p>Mỗi viên cốm là cả một niềm tự hào từ đồng nội, cam mát, gói trọn tâm huyết đầy màu sắc dân tộc.</p>
+      <p>Không chỉ là món ăn. ‘Cốm nén "CO'NE"’ còn là nỗi nhớ, là hương vị quê nhà."</p>
+      <p><em>Cốm không chỉ là món ăn, mà là ký ức, là hồn Việt giữa lòng phố cổ.</em></p>
+      <img src="assets/com-package.png" alt="Hình ảnh cốm minh họa">
+    </div>
+    <div class="section reverse">
+      <div>
+        <h2>THIẾT KẾ BAO BÌ</h2>
+        <ul>
+          <li>Màu sắc & hoạ tiết: Chủ đạo là màu xanh lá, mô phỏng lá dong/lá chuối biểu tượng của ấm thực dân gian
+            Việt. Phía dưới có in hình danh lam thắng cảnh của Hà Nội bằng màu vàng nghệ: có thể nhận thấy những công
+            trính như: chùa Một Cột, tháp Rùa, Văn Miếu... </li>
+          <li>Quai túi: Được làm từ dây thừng giấy xoắn hoặc dây đay tự nhiên, tạo cảm giác thủ công, gần gũi</li>
+        </ul>
+        <p><em>Không chỉ là bao bì, mà là cách kể chuyện của cốm Việt.</em></p>
+      </div>
+      <img src="assets/baobi-removebg-preview.png" alt="Bao bì sản phẩm">
+    </div>
+  </div>
+  <div class="product-section">
+    <div class="product">
+      <img src="assets/baobi2.png" alt="Cốm truyền thống" style="height: 150px; width: 100px;">
+      <h3>Gói nhỏ kraft 100-150G</h3>
+      <p>Được làm từ nếp non đầu mùa, mang hương vị đậm đà truyền thống.</p>
+      <button onclick="selectProduct('Gói nhỏ kraft 100-150G')">Mua ngay</button>
+    </div>
+    <div class="product">
+      <img src="assets/baobi.jpg" alt="Gói premium 500G" style="height: 150px; width: 100px;">
+      <h3>Gói premium 500G</h3>
+      <p>Kết hợp vị thơm của cốm với sự ngậy béo của dừa non tươi.</p>
+      <button onclick="selectProduct('Gói premium 500G')">Mua ngay</button>
+    </div>
+  </div>
+
+  <div class="form-cart-wrapper">
+    <div class="cart-form" id="cart">
+      <h2>Giỏ hàng</h2>
+      <select id="product-select">
+        <option value="Gói nhỏ kraft 100-150G" data-price="50000">Gói nhỏ kraft 100-150G</option>
+        <option value="Gói premium 500G" data-price="150000 ">Gói premium 500G </option>
+      </select>
+      <button onclick="addToCart()">Thêm sản phẩm</button>
+      <ul id="cart-items"></ul>
+      <div class="cart-summary" id="cart-summary"></div>
+      <button class="btn" onclick="placeOrder()">Đặt hàng</button>
+      <div id="order-success"></div>
+    </div>
+    <div class="contact-form" id="contact">
+      <h2>Liên hệ với chúng tôi</h2>
+      <form action="#" method="POST">
+        <input type="text" name="name" placeholder="Họ tên" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <textarea name="message" rows="5" placeholder="Nội dung liên hệ" required></textarea>
+        <button type="submit">Gửi</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <div></div>
+    <div>
+      <h3>LIÊN HỆ</h3>
+      <p>Email: khododanh4pi@gmail.com</p>
+      <p>Địa chỉ:Nguyễn Đức Cảnh, Hoàng Mai,Hà Nội, Việt Nam</p>
+      <p>Điện thoại: 0123 456 789</p>
+    </div>
+  </footer>
+
+  <script>
+    const cart = {};
+    const prices = {
+      "Gói premium 500G": 150000,
+      "Gói nhỏ kraft 100-150G": 50000,
+    };
+    function addToCart() {
+      const select = document.getElementById("product-select");
+      const product = select.value;
+      if (!cart[product]) {
+        cart[product] = 1;
+      } else {
+        cart[product]++;
+      }
+      renderCart();
+    }
+
+    function selectProduct(product) {
+      document.getElementById("product-select").value = product;
+      addToCart();
+      document.getElementById("cart").scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function updateQuantity(product, quantity) {
+      cart[product] = parseInt(quantity);
+      renderCart();
+    }
+
+    function removeItem(product) {
+      delete cart[product];
+      renderCart();
+    }
+
+    function renderCart() {
+      const cartItems = document.getElementById("cart-items");
+      const summary = document.getElementById("cart-summary");
+      cartItems.innerHTML = "";
+      let total = 0;
+      for (let product in cart) {
+        const itemTotal = prices[product] * cart[product];
+        total += itemTotal;
+        const li = document.createElement("li");
+        li.innerHTML = `<div class="cart-item">
+          <span>${product}</span>
+          <input type="number" min="1" value="${cart[product]}" onchange="updateQuantity('${product}', this.value)">
+          <span>${itemTotal.toLocaleString()}₫</span>
+          <button onclick="removeItem('${product}')">Xóa</button>
+        </div>`;
+        cartItems.appendChild(li);
+      }
+      summary.innerText = `Tổng cộng: ${total.toLocaleString()}₫`;
+    }
+
+    function setActive(link) {
+      const navLinks = document.querySelectorAll('nav a');
+      navLinks.forEach(el => el.classList.remove('active'));
+      link.classList.add('active');
+    }
+    function placeOrder() {
+      const orderSuccess = document.getElementById('order-success');
+      orderSuccess.textContent = 'Đặt hàng thành công';
+    }
+    function placeOrder() {
+      const orderSuccess = document.getElementById('order-success');
+      orderSuccess.textContent = 'Đặt hàng thành công';
+      orderSuccess.style.animation = 'fadeOut 2s ease-out 2s forwards';
+    }
+
+  </script>
+</body>
+
+</html>
